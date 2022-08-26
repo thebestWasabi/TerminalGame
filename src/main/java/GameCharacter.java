@@ -18,24 +18,40 @@ public class GameCharacter {
 
         if (target.block) {
             if (Math.random() <= 0.5) {
-                System.out.printf("%s полностью заблокировал атаку", target.name);
+                System.out.printf("%s атакует, но %s полностью блокирует атаку",
+                        this.name,
+                        target.name);
+
             } else {
                 criticalDamageIgnoringBlock *= 1.5;
                 target.healthPoint -= criticalDamageIgnoringBlock;
-                System.out.printf("Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед " +
-                                "по незащищенной области\nУ %s осталось %d ед здоровья",
-                        target.name, this.name, criticalDamageIgnoringBlock, target.name, target.healthPoint);
+                System.out.printf(
+                        "Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед " +
+                                "по незащищенной области\nУ %s осталось %d / %d ед здоровья",
+                        target.name,
+                        this.name,
+                        criticalDamageIgnoringBlock,
+                        target.name,
+                        target.healthPoint,
+                        target.maximumHealthPoint);
             }
             return;
         }
         target.healthPoint -= damage;
-        System.out.printf("%s атакует и наносит персонажу '%s' %d ед урона.\nУ персонажа '%s' осталось %d ед здоровья.",
-                name, target.name, damage, target.name, target.healthPoint);
+        System.out.printf(
+                "%s атакует и наносит персонажу '%s' %d ед урона.\nУ персонажа '%s' осталось %d / %d ед здоровья.",
+                this.name,
+                target.name,
+                this.damage,
+                target.name,
+                target.healthPoint,
+                target.maximumHealthPoint);
     }
 
     public void blockAction() {
         block = true;
-        System.out.printf("%s защищается", this.name);
+        System.out.printf("%s встает в защитную стойку и готовится...",
+                this.name);
     }
 
     public void healing() {
