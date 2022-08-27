@@ -4,16 +4,19 @@ import java.io.InputStreamReader;
 
 public class Battle {
 
-    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
 
     public static void fight() throws IOException {
 
-        GameCharacter hero = new GameCharacter("Лука", 10, 2);
-        GameCharacter monster = new GameCharacter("Гоблин", 10, 2);
+        MainHero hero = new MainHero("Лука", 10, 5, 5, 2, 0);
+        Goblin monster = new Goblin("Гоблин", 10, 5, 5, 2, 2);
 
-        System.out.printf("%s начинает свое путешествие.\n" +
+        System.out.printf(
+                "%s начинает свое путешествие.\n" +
                         "Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s.",
-                hero.getName(), monster.getName());
+                hero.getName(),
+                monster.getName()
+        );
 
         while (true) {
 
@@ -21,12 +24,17 @@ public class Battle {
 
             System.out.printf("\n\nХод героя: %s\n", hero.getName());
 
-            String input = reader.readLine();
+            String input = READER.readLine();
 
             if (input.equals("/атака")) {
                 hero.attack(monster);
                 if (monster.getHealthPoint() <= 0) {
-                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой", hero.getName(), monster.getName());
+
+                    System.out.printf(
+                            "\n\n%s убил персонажа '%s' и выиграл бой",
+                            hero.getName(),
+                            monster.getName()
+                    );
                     break;
                 }
 
@@ -34,12 +42,19 @@ public class Battle {
                 hero.blockAction();
             }
 
-            System.out.printf("\n\nХод противника: %s\n", monster.getName());
+            System.out.printf(
+                    "\n\nХод противника: %s\n",
+                    monster.getName()
+            );
 
             monster.attack(hero);
 
             if (hero.getHealthPoint() <= 0) {
-                System.out.printf("\n\n'%s' убил персонажа %s и выиграл бой", monster.getName(), hero.getName());
+                System.out.printf(
+                        "\n\n'%s' убил персонажа %s и выиграл бой",
+                        monster.getName(),
+                        hero.getName()
+                );
                 break;
             }
 

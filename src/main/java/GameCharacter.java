@@ -1,30 +1,49 @@
-public class GameCharacter {
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public abstract class GameCharacter implements Fighter {
+
     private String name;
     private int maximumHealthPoint;
     private int healthPoint;
+    private int strength;
+    private int dexterity;
+    private int xp;
+    private int gold;
     private int damage;
     private boolean block;
 
-    public GameCharacter(String name, int maximumHealthPoint, int damage) {
+    public GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int damage, int gold) {
         this.name = name;
         this.maximumHealthPoint = maximumHealthPoint;
         this.healthPoint = maximumHealthPoint;
+        this.strength = strength;
+        this.dexterity = dexterity;
+        this.gold = gold;
         this.damage = damage;
         this.block = false;
     }
 
+    @Override
     public void attack(GameCharacter target) {
         int criticalDamageIgnoringBlock = damage;
 
         if (target.block) {
+
             if (Math.random() <= 0.5) {
-                System.out.printf("%s атакует, но %s полностью блокирует атаку",
+
+                System.out.printf(
+                        "%s атакует, но %s полностью блокирует атаку",
                         this.name,
-                        target.name);
+                        target.name
+                );
 
             } else {
                 criticalDamageIgnoringBlock *= 1.5;
                 target.healthPoint -= criticalDamageIgnoringBlock;
+
                 System.out.printf(
                         "Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед " +
                                 "по незащищенной области\nУ %s осталось %d / %d ед здоровья",
@@ -33,11 +52,14 @@ public class GameCharacter {
                         criticalDamageIgnoringBlock,
                         target.name,
                         target.healthPoint,
-                        target.maximumHealthPoint);
+                        target.maximumHealthPoint
+                );
             }
             return;
         }
+
         target.healthPoint -= damage;
+
         System.out.printf(
                 "%s атакует и наносит персонажу '%s' %d ед урона.\nУ персонажа '%s' осталось %d / %d ед здоровья.",
                 this.name,
@@ -48,57 +70,21 @@ public class GameCharacter {
                 target.maximumHealthPoint);
     }
 
+    @Override
     public void blockAction() {
         block = true;
-        System.out.printf("%s встает в защитную стойку и готовится...",
-                this.name);
-    }
-
-    public void healing() {
-
+        System.out.printf(
+                "%s встает в защитную стойку и готовится...",
+                this.name
+        );
     }
 
     public void blockReset() {
         block = false;
     }
 
-    public String getName() {
-        return name;
-    }
+    @Override
+    public void healing() {
 
-    public int getMaximumHealthPoint() {
-        return maximumHealthPoint;
-    }
-
-    public int getHealthPoint() {
-        return healthPoint;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public boolean isBlock() {
-        return block;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setMaximumHealthPoint(int maximumHealthPoint) {
-        this.maximumHealthPoint = maximumHealthPoint;
-    }
-
-    public void setHealthPoint(int healthPoint) {
-        this.healthPoint = healthPoint;
-    }
-
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
-
-    public void setBlock(boolean block) {
-        this.block = block;
     }
 }
