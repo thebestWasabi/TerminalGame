@@ -1,3 +1,6 @@
+import characters.battle_characters.Goblin;
+import characters.battle_characters.MainHero;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -8,8 +11,8 @@ public class Battle {
 
     public static void fight() throws IOException {
 
-        MainHero hero = new MainHero("Лука", 10, 5, 5, 2, 0);
-        Goblin monster = new Goblin("Гоблин", 10, 5, 5, 2, 2);
+        MainHero hero = new MainHero("Лука", 10, 4, 4, 2, 0);
+        Goblin monster = new Goblin("Молодой Гоблин", 6, 6, 6, 2, 2);
 
         System.out.printf(
                 "%s начинает свое путешествие.\n" +
@@ -30,8 +33,7 @@ public class Battle {
                 hero.attack(monster);
                 if (monster.getHealthPoint() <= 0) {
 
-                    System.out.printf(
-                            "\n\n%s убил персонажа '%s' и выиграл бой",
+                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой",
                             hero.getName(),
                             monster.getName()
                     );
@@ -42,20 +44,21 @@ public class Battle {
                 hero.blockAction();
             }
 
-            System.out.printf(
-                    "\n\nХод противника: %s\n",
-                    monster.getName()
-            );
+            System.out.printf("\n\nХод противника: %s\n", monster.getName());
+            monster.blockReset(); // монстр тоже сбрасывает блок в начале каждого хода
 
-            monster.attack(hero);
+            if (Math.random() < 0.5) {
+                monster.attack(hero);
+                if (hero.getHealthPoint() <= 0) {
 
-            if (hero.getHealthPoint() <= 0) {
-                System.out.printf(
-                        "\n\n'%s' убил персонажа %s и выиграл бой",
-                        monster.getName(),
-                        hero.getName()
-                );
-                break;
+                    System.out.printf("\n\n'%s' убил персонажа %s и выиграл бой",
+                            monster.getName(),
+                            hero.getName()
+                    );
+                    break;
+                }
+            } else {
+                monster.blockAction();
             }
 
         }

@@ -1,3 +1,6 @@
+package characters.battle_characters;
+
+import characters.Fighter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -72,6 +75,7 @@ public abstract class GameCharacter implements Fighter {
 
     @Override
     public void blockAction() {
+        healthPoint++;
         block = true;
         System.out.printf(
                 "%s встает в защитную стойку и готовится...",

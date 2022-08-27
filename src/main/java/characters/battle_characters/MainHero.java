@@ -1,3 +1,7 @@
+package characters.battle_characters;
+
+import characters.battle_characters.GameCharacter;
+
 public class MainHero extends GameCharacter {
 
     public MainHero(String name, int maximumHealthPoint, int strength, int dexterity, int damage, int gold) {
