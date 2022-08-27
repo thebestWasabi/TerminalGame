@@ -1,6 +1,6 @@
-package characters.battle_characters;
+package characters;
 
-import characters.Fighter;
+import characters.battle_characters.Fighter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -61,7 +61,7 @@ public abstract class GameCharacter implements Fighter {
             return;
         }
 
-        target.healthPoint -= damage;
+        target.healthPoint -= damage + strength;
 
         System.out.printf(
                 "%s атакует и наносит персонажу '%s' %d ед урона.\nУ персонажа '%s' осталось %d / %d ед здоровья.",

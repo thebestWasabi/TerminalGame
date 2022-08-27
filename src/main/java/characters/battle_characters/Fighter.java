@@ -1,6 +1,6 @@
-package characters;
+package characters.battle_characters;
 
-import characters.battle_characters.GameCharacter;
+import characters.GameCharacter;
 
 public interface Fighter {
 
