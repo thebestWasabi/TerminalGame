@@ -47,9 +47,9 @@ public class Main {
                                         
                     Пишите свой выбор сюда:""");
 
-            String command = reader.readLine();
+            string = reader.readLine();
 
-            switch (command) {
+            switch (string) {
                 case "1" -> System.out.println("\nВ городе пока что нет городского торговца\n");
                 case "2" -> goToTheDarkWood();
                 case "3" -> System.out.println("Exit");

@@ -46,6 +46,8 @@ public class Battle {
 
             } else if (input.equals("/блок")) {
                 hero.blockAction();
+            } else if (input.equals("/зелье здоровья")) {
+
             }
 
             System.out.printf("\n\nХод противника: %s\n", monster.getName());

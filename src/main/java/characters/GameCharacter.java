@@ -83,9 +83,10 @@ public abstract class GameCharacter implements Fighter {
     public void blockAction() {
 
         block = true;
+        healthPoint++;
+
         if (this.healthPoint > this.maximumHealthPoint) {
             this.healthPoint = this.maximumHealthPoint;
-            healthPoint++;
         }
 
         System.out.printf("""
