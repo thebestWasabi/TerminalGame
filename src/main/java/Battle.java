@@ -1,3 +1,4 @@
+import characters.GameCharacter;
 import characters.battle_characters.Goblin;
 import characters.battle_characters.MainHero;
 
@@ -9,10 +10,7 @@ public class Battle {
 
     private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void fight() throws IOException {
-
-        MainHero hero = new MainHero("Лука", 10, 1, 4, 2, 0);
-        Goblin monster = new Goblin("Молодой Гоблин", 6, 2, 6, 2, 2);
+    public static void fight(GameCharacter hero, GameCharacter monster) throws IOException {
 
         System.out.printf("""
                                                 

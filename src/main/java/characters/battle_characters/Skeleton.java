@@ -4,8 +4,7 @@ import characters.GameCharacter;
 
 public class Skeleton extends GameCharacter {
 
-    public Skeleton(String name, int maximumHealthPoint, int strength, int dexterity, int damage, int gold) {
-        super(name, maximumHealthPoint, strength, dexterity, damage, gold);
+    public Skeleton(String name, int maximumHealthPoint, int strength, int dexterity, int attackPower, int gold) {
+        super(name, maximumHealthPoint, strength, dexterity, attackPower, gold);
     }
-
 }

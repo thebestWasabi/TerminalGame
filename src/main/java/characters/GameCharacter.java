@@ -13,25 +13,30 @@ public abstract class GameCharacter implements Fighter {
     private int healthPoint;
     private int strength;
     private int dexterity;
-    private int xp;
-    private int gold;
-    private int damage;
+    private int attackPower;
+
+
     private boolean block;
 
-    public GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int damage, int gold) {
+    private int xp;
+    private int gold;
+
+
+    public GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int attackPower, int gold) {
         this.name = name;
         this.maximumHealthPoint = maximumHealthPoint;
         this.healthPoint = maximumHealthPoint;
         this.strength = strength;
         this.dexterity = dexterity;
         this.gold = gold;
-        this.damage = damage;
+        this.attackPower = attackPower;
         this.block = false;
     }
 
     @Override
     public void attack(GameCharacter target) {
-        int criticalDamageIgnoringBlock = damage;
+        int damage = attackPower + strength;
+        int criticalDamageIgnoringBlock = damage * 2;
 
         if (target.block) {
 
@@ -44,7 +49,6 @@ public abstract class GameCharacter implements Fighter {
                 );
 
             } else {
-                criticalDamageIgnoringBlock *= 1.5;
                 target.healthPoint -= criticalDamageIgnoringBlock;
 
                 System.out.printf(
@@ -61,13 +65,15 @@ public abstract class GameCharacter implements Fighter {
             return;
         }
 
-        target.healthPoint -= damage + strength;
+        target.healthPoint -= damage;
 
-        System.out.printf(
-                "%s атакует и наносит персонажу '%s' %d ед урона.\nУ персонажа '%s' осталось %d / %d ед здоровья.",
+        System.out.printf("""
+                        %s атакует и наносит персонажу '%s' %d ед урона.
+                        У персонажа '%s' осталось %d / %d ед здоровья.
+                        """,
                 this.name,
                 target.name,
-                this.damage,
+                damage,
                 target.name,
                 target.healthPoint,
                 target.maximumHealthPoint);
@@ -75,11 +81,20 @@ public abstract class GameCharacter implements Fighter {
 
     @Override
     public void blockAction() {
-        healthPoint++;
+
         block = true;
-        System.out.printf(
-                "%s встает в защитную стойку и готовится...",
-                this.name
+        if (this.healthPoint > this.maximumHealthPoint) {
+            this.healthPoint = this.maximumHealthPoint;
+            healthPoint++;
+        }
+
+        System.out.printf("""
+                        %s встает в защитную стойку и готовится...
+                        Здоровье +1 ед (%d / %d)
+                        """,
+                this.name,
+                this.healthPoint,
+                this.maximumHealthPoint
         );
     }
 
