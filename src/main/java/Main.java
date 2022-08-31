@@ -1,7 +1,7 @@
 import characters.GameCharacter;
 import characters.battle_characters.Goblin;
 import characters.battle_characters.MainHero;
-import characters.battle_characters.Skeleton;
+import characters.battle_characters.Scavenger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,17 +9,23 @@ import java.io.InputStreamReader;
 
 public class Main {
 
-    static BufferedReader reader;
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static GameCharacter player = null;
-    static Battle battle = null;
+
+    static final String MENU = """
+            
+            ---Лука стоит на городской площади---
+            \nВыберите что делать дальше и нажмите enter:
+            1. Пойти к городскому торговцу
+            2. Пойти в темный лес
+            3. Пойти домой (выйти из игры)
+            \nПишите свой выбор сюда:""";
 
     public static void main(String[] args) {
         startGame();
     }
 
     public static void startGame() {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-
         System.out.print("Введите имя своего персонажа: ");
 
         try {
@@ -27,25 +33,16 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static void characterControl(String string) throws IOException {
 
         if (player == null) {
-            player = new MainHero(string, 10, 2, 2, 2, 0);
+            player = new MainHero(string, 80, 20, 20, 10, 0);
         }
 
         do {
-            System.out.print("""
-                    Лука стоит на городской площади.
-                                        
-                    Выберите что делать дальше и нажмите enter:
-                    1. Пойти к городскому торговцу
-                    2. Пойти в темный лес
-                    3. Пойти домой (выйти из игры)
-                                        
-                    Пишите свой выбор сюда:""");
+            System.out.println(MENU);
 
             string = reader.readLine();
 
@@ -61,15 +58,13 @@ public class Main {
     public static GameCharacter createMonster() {
 
         if (Math.random() <= 0.5) {
-            return new Goblin("Молодой гоблин", 6, 2, 4, 2, 3);
+            return new Goblin("Гоблин" , 40, 10, 15, 10, 1);
         } else {
-            return new Skeleton("Скелет воин", 8, 2, 4, 2, 4);
+            return new Scavenger("Мародёр" , 60, 15, 10, 10, 2);
         }
     }
 
     private static void goToTheDarkWood() throws IOException {
-        battle.fight(player, createMonster());
+        Battle.fight(player, createMonster());
     }
-
-
 }

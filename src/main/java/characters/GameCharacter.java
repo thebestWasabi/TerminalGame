@@ -41,26 +41,15 @@ public abstract class GameCharacter implements Fighter {
         if (target.block) {
 
             if (Math.random() <= 0.5) {
-
-                System.out.printf(
-                        "%s атакует, но %s полностью блокирует атаку",
-                        this.name,
-                        target.name
-                );
+                System.out.printf("%s атакует, но %s полностью блокирует атаку", this.name, target.name);
 
             } else {
                 target.healthPoint -= criticalDamageIgnoringBlock;
 
-                System.out.printf(
-                        "Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед " +
-                                "по незащищенной области\nУ %s осталось %d / %d ед здоровья",
-                        target.name,
-                        this.name,
-                        criticalDamageIgnoringBlock,
-                        target.name,
-                        target.healthPoint,
-                        target.maximumHealthPoint
-                );
+                System.out.printf("""
+                        Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед по незащищенной области
+                        У %s осталось %d / %d ед здоровья
+                        """, target.name, this.name, criticalDamageIgnoringBlock, target.name, target.healthPoint, target.maximumHealthPoint);
             }
             return;
         }
@@ -68,20 +57,13 @@ public abstract class GameCharacter implements Fighter {
         target.healthPoint -= damage;
 
         System.out.printf("""
-                        %s атакует и наносит персонажу '%s' %d ед урона.
-                        У персонажа '%s' осталось %d / %d ед здоровья.
-                        """,
-                this.name,
-                target.name,
-                damage,
-                target.name,
-                target.healthPoint,
-                target.maximumHealthPoint);
+                %s атакует и наносит персонажу '%s' %d ед урона.
+                У персонажа '%s' осталось %d / %d ед здоровья.
+                """, this.name, target.name, damage, target.name, target.healthPoint, target.maximumHealthPoint);
     }
 
     @Override
     public void blockAction() {
-
         block = true;
         healthPoint++;
 
@@ -90,13 +72,9 @@ public abstract class GameCharacter implements Fighter {
         }
 
         System.out.printf("""
-                        %s встает в защитную стойку и готовится...
-                        Здоровье +1 ед (%d / %d)
-                        """,
-                this.name,
-                this.healthPoint,
-                this.maximumHealthPoint
-        );
+                %s встает в защитную стойку и готовится...
+                Здоровье +1 ед (%d / %d)
+                """, this.name, this.healthPoint, this.maximumHealthPoint);
     }
 
     public void blockReset() {
@@ -105,6 +83,10 @@ public abstract class GameCharacter implements Fighter {
 
     @Override
     public void healing() {
+        int potion = 20;
+        this.healthPoint = this.healthPoint + potion;
 
+        System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)",
+                this.name, potion, this.healthPoint, this.maximumHealthPoint);
     }
 }
