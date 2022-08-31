@@ -40,8 +40,8 @@ public abstract class GameCharacter implements Fighter {
 
         if (target.block) {
 
-            if (Math.random() <= 0.5) {
-                System.out.printf("%s атакует, но %s полностью блокирует атаку", this.name, target.name);
+            if (Math.random() <= 0.75) {
+                System.out.printf("%s атакует, но %s полностью блокирует атаку\n", this.name, target.name);
 
             } else {
                 target.healthPoint -= criticalDamageIgnoringBlock;

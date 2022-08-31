@@ -14,13 +14,11 @@ public class Battle {
         System.out.printf("""
                         \n%s начинает свое путешествие.
                         Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s.
-                        """,
-                hero.getName(),
-                enemy.getName());
+                        """, hero.getName(), enemy.getName());
 
         while (true) {
 
-            System.out.printf("\n\n---Ход героя: %s---\n", hero.getName());
+            System.out.printf("\n---Ход героя: %s---\n", hero.getName());
             hero.blockReset();  // сразу, на всякий случай, скидываю блок с предидущего хода (даже если его не было)
 
             String input = reader.readLine();
@@ -45,7 +43,7 @@ public class Battle {
             System.out.printf("\n\n---Ход противника: %s---\n", enemy.getName());
             enemy.blockReset();   // монстр тоже сбрасывает блок в начале каждого хода
 
-            if (Math.random() < 0.5) {
+            if (Math.random() < 0.7) {
                 System.out.println("/атака");
                 enemy.attack(hero);
 

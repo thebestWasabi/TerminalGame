@@ -12,15 +12,6 @@ public class Main {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
     static GameCharacter player = null;
 
-    static final String MENU = """
-            
-            ---Лука стоит на городской площади---
-            \nВыберите что делать дальше и нажмите enter:
-            1. Пойти к городскому торговцу
-            2. Пойти в темный лес
-            3. Пойти домой (выйти из игры)
-            \nПишите свой выбор сюда:""";
-
     public static void main(String[] args) {
         startGame();
     }
@@ -35,24 +26,34 @@ public class Main {
         }
     }
 
-    public static void characterControl(String string) throws IOException {
+    public static void characterControl(String name) throws IOException {
 
         if (player == null) {
-            player = new MainHero(string, 80, 20, 20, 10, 0);
+            player = new MainHero(name, 80, 10, 10, 10, 0);
         }
 
+        String command;
+
         do {
-            System.out.println(MENU);
+            System.out.printf("""
+            \n---%s стоит на городской площади---
+            \nВыберите что делать дальше и нажмите enter:
+            1. Пойти к городскому торговцу
+            2. Пойти в темный лес
+            3. Пойти домой (выйти из игры)
+            """, name);
 
-            string = reader.readLine();
+            System.out.print("\nПишите свой выбор сюда: ");
 
-            switch (string) {
-                case "1" -> System.out.println("\nВ городе пока что нет городского торговца\n");
+            command = reader.readLine();
+
+            switch (command) {
+                case "1" -> System.out.println("\nВ городе пока что нет городского торговца");
                 case "2" -> goToTheDarkWood();
                 case "3" -> System.out.println("Exit");
             }
 
-        } while (!string.equals("3"));
+        } while (!command.equals("3"));
     }
 
     public static GameCharacter createMonster() {
