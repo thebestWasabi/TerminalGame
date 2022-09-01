@@ -8,7 +8,8 @@ public class MainHero extends GameCharacter {
         super(name, maximumHealthPoint, strength, dexterity, attackPower, gold);
     }
 
-    public static void say() {
-        System.out.println("Ты кто такой?!");
+    public static MainHero createPlayer(String name) {
+        return new MainHero(name, 80, 10, 10, 10, 0);
     }
+
 }

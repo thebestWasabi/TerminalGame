@@ -27,15 +27,13 @@ public class Battle {
                 hero.attack(enemy);
 
                 if (enemy.getHealthPoint() <= 0) {
-                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n",
-                            hero.getName(),
-                            enemy.getName()
-                    );
+                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", hero.getName(), enemy.getName());
                     break;
                 }
 
             } else if (input.equals("/блок")) {
                 hero.blockAction();
+
             } else if (input.equals("/зелье")) {
                 hero.healing();
             }
@@ -48,10 +46,7 @@ public class Battle {
                 enemy.attack(hero);
 
                 if (hero.getHealthPoint() <= 0) {
-                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n",
-                            enemy.getName(),
-                            hero.getName()
-                    );
+                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", enemy.getName(), hero.getName());
                     break;
                 }
 
