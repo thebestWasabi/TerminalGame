@@ -65,7 +65,7 @@ public abstract class GameCharacter implements Fighter {
     @Override
     public void blockAction() {
         block = true;
-        healthPoint++;
+        healthPoint += 7;
 
         if (this.healthPoint > this.maximumHealthPoint) {
             this.healthPoint = this.maximumHealthPoint;
@@ -73,7 +73,7 @@ public abstract class GameCharacter implements Fighter {
 
         System.out.printf("""
                 %s встает в защитную стойку и готовится...
-                Здоровье +1 ед (%d / %d)
+                Здоровье +7 ед (%d / %d)
                 """, this.name, this.healthPoint, this.maximumHealthPoint);
     }
 
@@ -83,10 +83,14 @@ public abstract class GameCharacter implements Fighter {
 
     @Override
     public void healing() {
-        int potion = 20;
+        int potion = 30;
         this.healthPoint = this.healthPoint + potion;
 
-        System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)",
+        if (this.healthPoint > this.maximumHealthPoint) {
+            this.healthPoint = this.maximumHealthPoint;
+        }
+
+        System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)\n",
                 this.name, potion, this.healthPoint, this.maximumHealthPoint);
     }
 }

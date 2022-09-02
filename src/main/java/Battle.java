@@ -18,6 +18,8 @@ public class Battle {
         while (true) {
 
             System.out.printf("\n---Ход героя: %s---\n", hero.getName());
+            System.out.println("Введите в консоль команду из списка: '/атака', '/блок', '/зелье' что бы совершить действие");
+
             hero.blockReset();  // сразу, на всякий случай, скидываю блок с предидущего хода (даже если его не было)
 
             String input = reader.readLine();
@@ -37,7 +39,7 @@ public class Battle {
                 hero.healing();
             }
 
-            System.out.printf("\n\n---Ход противника: %s---\n", enemy.getName());
+            System.out.printf("\n---Ход противника: %s---\n", enemy.getName());
             enemy.blockReset();   // монстр тоже сбрасывает блок в начале каждого хода
 
             if (Math.random() < 0.7) {
