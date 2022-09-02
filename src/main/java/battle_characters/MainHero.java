@@ -10,7 +10,7 @@ public class MainHero extends GameCharacter {
 
 
     protected MainHero(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, List<Sword> swords, int gold) {
-        super(name, maxHealthPoint, strength, dexterity, attackPower, swords, gold);
+        super(name, maxHealthPoint, strength, dexterity, attackPower, gold);
     }
 
     public static MainHero createPlayer(String name) {

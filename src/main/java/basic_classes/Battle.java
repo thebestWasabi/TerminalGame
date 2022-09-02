@@ -9,8 +9,10 @@ public class Battle {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void fight(GameCharacter hero, GameCharacter enemy) throws IOException {
-        System.out.printf("\n%s начинает свое путешествие" +
-                        "Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s",
+        System.out.printf("""
+                        \n%s начинает свое путешествие
+                        Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s
+                        """,
                 hero.getName(), enemy.getName());
 
         while (true) {

@@ -46,9 +46,10 @@ public abstract class GameCharacter implements Fighter {
             } else {
                 target.healthPoint -= criticalDamageIgnoringBlock;
 
-                System.out.printf("Пока %s стоит в блоке " +
-                                "%s атакует и наносит увеличиный урон в %d ед по незащищенной области\n" +
-                                "У %s осталось %d / %d ед здоровья",
+                System.out.printf("""
+                                Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед по незащищенной области
+                                У персонажа %s осталось %d / %d ед здоровья
+                                """,
                         target.name, this.name, criticalDamageIgnoringBlock,
                         target.name, target.healthPoint, target.maxHealthPoint);
             }
@@ -57,8 +58,10 @@ public abstract class GameCharacter implements Fighter {
 
         target.healthPoint -= damage;
 
-        System.out.printf("%s атакует и наносит персонажу '%s' %d ед урона\n" +
-                "У персонажа '%s' осталось %d / %d ед здоровья",
+        System.out.printf("""
+                        %s атакует и наносит персонажу '%s' %d ед урона
+                        У персонажа '%s' осталось %d / %d ед здоровья
+                        """,
                 this.name, target.name, damage, target.name, target.healthPoint, target.maxHealthPoint);
     }
 
