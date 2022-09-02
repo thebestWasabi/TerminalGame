@@ -22,7 +22,7 @@ public abstract class GameCharacter implements Fighter {
     private int gold;
 
 
-    public GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int attackPower, int gold) {
+    protected GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int attackPower, int gold) {
         this.name = name;
         this.maximumHealthPoint = maximumHealthPoint;
         this.healthPoint = maximumHealthPoint;

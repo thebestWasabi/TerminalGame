@@ -1,5 +1,4 @@
 import characters.GameCharacter;
-import characters.battle_characters.MainHero;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -56,5 +55,9 @@ public class Battle {
             }
 
         }
+    }
+
+    private Battle() {
+        throw new IllegalStateException("Utility class");
     }
 }

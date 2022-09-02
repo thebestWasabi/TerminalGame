@@ -12,4 +12,8 @@ public class Monsters {
             return new Scavenger("Мародёр" , 60, 15, 10, 10, 2);
         }
     }
+
+    private Monsters() {
+        throw new IllegalStateException("Utility class");
+    }
 }

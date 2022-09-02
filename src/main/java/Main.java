@@ -35,8 +35,10 @@ public class Main {
 
         do {
             System.out.printf("""
-                    \n---%s стоит на городской площади---
-                    \nВыберите что делать дальше и нажмите enter:
+                    
+                    ---%s стоит на городской площади---
+                    
+                    Выберите что делать дальше и нажмите enter:
                     1. Пойти к городскому торговцу
                     2. Пойти в темный лес
                     3. Пойти домой (выйти из игры)
@@ -45,11 +47,11 @@ public class Main {
             System.out.print("\nПишите свой выбор сюда: ");
 
             command = reader.readLine();
-
             switch (command) {
                 case "1" -> System.out.println("\nВ городе пока что нет городского торговца");
                 case "2" -> goToTheDarkWood();
                 case "3" -> System.out.println("Exit");
+                default -> System.out.println("Введите корректное значение");
             }
 
         } while (!command.equals("3"));
