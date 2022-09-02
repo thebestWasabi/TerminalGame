@@ -1,4 +1,4 @@
-import characters.GameCharacter;
+package basic_classes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,26 +9,21 @@ public class Battle {
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     public static void fight(GameCharacter hero, GameCharacter enemy) throws IOException {
-
-        System.out.printf("""
-                        \n%s начинает свое путешествие.
-                        Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s.
-                        """, hero.getName(), enemy.getName());
+        System.out.printf("\n%s начинает свое путешествие" +
+                        "Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s",
+                hero.getName(), enemy.getName());
 
         while (true) {
-
             System.out.printf("\n---Ход героя: %s---\n", hero.getName());
             System.out.println("Введите в консоль команду из списка: '/атака', '/блок', '/зелье' что бы совершить действие");
 
-            hero.blockReset();  // сразу, на всякий случай, скидываю блок с предидущего хода (даже если его не было)
+            hero.blockReset();
 
             String input = reader.readLine();
-
             if (input.equals("/атака")) {
                 hero.attack(enemy);
-
                 if (enemy.getHealthPoint() <= 0) {
-                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", hero.getName(), enemy.getName());
+                    System.out.printf("\n%s убил персонажа '%s' и выиграл бой\n", hero.getName(), enemy.getName());
                     break;
                 }
 
@@ -40,14 +35,13 @@ public class Battle {
             }
 
             System.out.printf("\n---Ход противника: %s---\n", enemy.getName());
-            enemy.blockReset();   // монстр тоже сбрасывает блок в начале каждого хода
+            enemy.blockReset();
 
             if (Math.random() < 0.7) {
                 System.out.println("/атака");
                 enemy.attack(hero);
-
                 if (hero.getHealthPoint() <= 0) {
-                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", enemy.getName(), hero.getName());
+                    System.out.printf("\n%s убил персонажа '%s' и выиграл бой\n", enemy.getName(), hero.getName());
                     break;
                 }
 
@@ -55,7 +49,6 @@ public class Battle {
                 System.out.println("/блок");
                 enemy.blockAction();
             }
-
         }
     }
 

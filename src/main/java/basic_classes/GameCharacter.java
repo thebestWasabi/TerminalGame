@@ -1,6 +1,6 @@
-package characters;
+package basic_classes;
 
-import characters.battle_characters.Fighter;
+import battle_characters.Fighter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,12 +9,12 @@ import lombok.Setter;
 public abstract class GameCharacter implements Fighter {
 
     private String name;
-    private int maximumHealthPoint;
+    private int maxHealthPoint;
     private int healthPoint;
     private int strength;
     private int dexterity;
     private int attackPower;
-
+    private int defence;
 
     private boolean block;
 
@@ -22,14 +22,14 @@ public abstract class GameCharacter implements Fighter {
     private int gold;
 
 
-    protected GameCharacter(String name, int maximumHealthPoint, int strength, int dexterity, int attackPower, int gold) {
+    protected GameCharacter(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, int gold) {
         this.name = name;
-        this.maximumHealthPoint = maximumHealthPoint;
-        this.healthPoint = maximumHealthPoint;
+        this.maxHealthPoint = maxHealthPoint;
+        this.healthPoint = maxHealthPoint;
         this.strength = strength;
         this.dexterity = dexterity;
-        this.gold = gold;
         this.attackPower = attackPower;
+        this.gold = gold;
         this.block = false;
     }
 
@@ -46,20 +46,20 @@ public abstract class GameCharacter implements Fighter {
             } else {
                 target.healthPoint -= criticalDamageIgnoringBlock;
 
-                System.out.printf("""
-                        Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед по незащищенной области
-                        У %s осталось %d / %d ед здоровья
-                        """, target.name, this.name, criticalDamageIgnoringBlock, target.name, target.healthPoint, target.maximumHealthPoint);
+                System.out.printf("Пока %s стоит в блоке " +
+                                "%s атакует и наносит увеличиный урон в %d ед по незащищенной области\n" +
+                                "У %s осталось %d / %d ед здоровья",
+                        target.name, this.name, criticalDamageIgnoringBlock,
+                        target.name, target.healthPoint, target.maxHealthPoint);
             }
             return;
         }
 
         target.healthPoint -= damage;
 
-        System.out.printf("""
-                %s атакует и наносит персонажу '%s' %d ед урона.
-                У персонажа '%s' осталось %d / %d ед здоровья.
-                """, this.name, target.name, damage, target.name, target.healthPoint, target.maximumHealthPoint);
+        System.out.printf("%s атакует и наносит персонажу '%s' %d ед урона\n" +
+                "У персонажа '%s' осталось %d / %d ед здоровья",
+                this.name, target.name, damage, target.name, target.healthPoint, target.maxHealthPoint);
     }
 
     @Override
@@ -67,14 +67,14 @@ public abstract class GameCharacter implements Fighter {
         block = true;
         healthPoint += 7;
 
-        if (this.healthPoint > this.maximumHealthPoint) {
-            this.healthPoint = this.maximumHealthPoint;
+        if (this.healthPoint > this.maxHealthPoint) {
+            this.healthPoint = this.maxHealthPoint;
         }
 
         System.out.printf("""
                 %s встает в защитную стойку и готовится...
                 Здоровье +7 ед (%d / %d)
-                """, this.name, this.healthPoint, this.maximumHealthPoint);
+                """, this.name, this.healthPoint, this.maxHealthPoint);
     }
 
     public void blockReset() {
@@ -86,11 +86,11 @@ public abstract class GameCharacter implements Fighter {
         int potion = 30;
         this.healthPoint = this.healthPoint + potion;
 
-        if (this.healthPoint > this.maximumHealthPoint) {
-            this.healthPoint = this.maximumHealthPoint;
+        if (this.healthPoint > this.maxHealthPoint) {
+            this.healthPoint = this.maxHealthPoint;
         }
 
         System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)\n",
-                this.name, potion, this.healthPoint, this.maximumHealthPoint);
+                this.name, potion, this.healthPoint, this.maxHealthPoint);
     }
 }

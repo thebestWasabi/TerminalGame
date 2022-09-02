@@ -1,6 +1,7 @@
-import characters.GameCharacter;
-import characters.battle_characters.Monsters;
-import characters.battle_characters.MainHero;
+import basic_classes.Battle;
+import basic_classes.GameCharacter;
+import battle_characters.Monsters;
+import battle_characters.MainHero;
 
 import java.io.BufferedReader;
 import java.io.IOException;
