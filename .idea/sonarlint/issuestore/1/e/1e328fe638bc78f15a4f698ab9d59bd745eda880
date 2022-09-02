@@ -1,0 +1,14 @@
+
+z	java:S135"YReduce the total number of break and continue statements in this loop to use at most one.(˜ïˆÿÿÿÿÿ8êİ°¼¯0
+0
+java:S1220""Move this file to a named package.
+J
+java:S5665"(Remove this unnecessary escape sequence.(©ë†ıÿÿÿÿ8Øì°¼¯0
+n
+java:S3457"Q%n should be used in place of \n to produce the platform-specific line separator.(ÿõû¾8İì°¼¯0
+s
+java:S3457"Q%n should be used in place of \n to produce the platform-specific line separator.(¯íÒ¶øÿÿÿÿ8îì°¼¯0
+s
+java:S3457("Q%n should be used in place of \n to produce the platform-specific line separator.(ò†•Òûÿÿÿÿ8ÿì°¼¯0
+s
+java:S34570"Q%n should be used in place of \n to produce the platform-specific line separator.(òçÍÌùÿÿÿÿ8–í°¼¯0

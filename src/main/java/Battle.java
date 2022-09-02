@@ -1,63 +1,65 @@
+import characters.GameCharacter;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Battle {
 
-    private static final BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
+    static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-    public static void fight() throws IOException {
+    public static void fight(GameCharacter hero, GameCharacter enemy) throws IOException {
 
-        MainHero hero = new MainHero("Лука", 10, 5, 5, 2, 0);
-        Goblin monster = new Goblin("Гоблин", 10, 5, 5, 2, 2);
-
-        System.out.printf(
-                "%s начинает свое путешествие.\n" +
-                        "Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s.",
-                hero.getName(),
-                monster.getName()
-        );
+        System.out.printf("""
+                        \n%s начинает свое путешествие.
+                        Как только он заходит в лес, то сразу же попадает в засаду, которую устроил %s.
+                        """, hero.getName(), enemy.getName());
 
         while (true) {
 
-            hero.blockReset(); // сразу, на всякий случай, скидываю блок с предидущего хода (даже если его не было)
+            System.out.printf("\n---Ход героя: %s---\n", hero.getName());
+            System.out.println("Введите в консоль команду из списка: '/атака', '/блок', '/зелье' что бы совершить действие");
 
-            System.out.printf("\n\nХод героя: %s\n", hero.getName());
+            hero.blockReset();  // сразу, на всякий случай, скидываю блок с предидущего хода (даже если его не было)
 
-            String input = READER.readLine();
+            String input = reader.readLine();
 
             if (input.equals("/атака")) {
-                hero.attack(monster);
-                if (monster.getHealthPoint() <= 0) {
+                hero.attack(enemy);
 
-                    System.out.printf(
-                            "\n\n%s убил персонажа '%s' и выиграл бой",
-                            hero.getName(),
-                            monster.getName()
-                    );
+                if (enemy.getHealthPoint() <= 0) {
+                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", hero.getName(), enemy.getName());
                     break;
                 }
 
             } else if (input.equals("/блок")) {
                 hero.blockAction();
+
+            } else if (input.equals("/зелье")) {
+                hero.healing();
             }
 
-            System.out.printf(
-                    "\n\nХод противника: %s\n",
-                    monster.getName()
-            );
+            System.out.printf("\n---Ход противника: %s---\n", enemy.getName());
+            enemy.blockReset();   // монстр тоже сбрасывает блок в начале каждого хода
 
-            monster.attack(hero);
+            if (Math.random() < 0.7) {
+                System.out.println("/атака");
+                enemy.attack(hero);
 
-            if (hero.getHealthPoint() <= 0) {
-                System.out.printf(
-                        "\n\n'%s' убил персонажа %s и выиграл бой",
-                        monster.getName(),
-                        hero.getName()
-                );
-                break;
+                if (hero.getHealthPoint() <= 0) {
+                    System.out.printf("\n\n%s убил персонажа '%s' и выиграл бой\n", enemy.getName(), hero.getName());
+                    break;
+                }
+
+            } else {
+                System.out.println("/блок");
+                enemy.blockAction();
             }
 
         }
+    }
+
+    private Battle() {
+        throw new IllegalStateException("Utility class");
     }
 }
