@@ -11,9 +11,9 @@ public class Monsters {
     public static GameCharacter createMonster() {
 
         if (Math.random() <= 0.5) {
-            return new Goblin("Гоблин", 40, 10, 15, 10, 50, 1);
+            return new Goblin("Гоблин", 25, 4, 6, 5, 50, 1);
         } else {
-            return new Scavenger("Мародёр", 60, 15, 10, 10, 60, 2);
+            return new Scavenger("Мародёр", 28, 6, 4, 5, 60, 2);
         }
     }
 
