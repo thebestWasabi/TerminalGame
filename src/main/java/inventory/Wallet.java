@@ -1,11 +1,15 @@
 package inventory;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Wallet extends Item {
 
     private int gold;
     private int silver;
     private int cooper;
-
 
     public Wallet(String name, int weight, int gold, int silver, int cooper) {
         super(name, weight);

@@ -1,5 +1,10 @@
 package inventory;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public abstract class Item {
 
     private String name;
@@ -9,7 +14,4 @@ public abstract class Item {
         this.name = name;
         this.weight = weight;
     }
-
-    Weapon sword1 = new Weapon("Стальной короткий меч", 5, 1);
-    Weapon sword2 = new Weapon("Стальной длинный меч", 10, 2);
 }
