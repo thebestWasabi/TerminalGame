@@ -19,16 +19,19 @@ public abstract class GameCharacter implements Fighter {
     private boolean block;
 
     private int xp;
+    private int maxXP;
     private int gold;
 
 
-    protected GameCharacter(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, int gold) {
+    protected GameCharacter(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, int xp, int gold) {
         this.name = name;
         this.maxHealthPoint = maxHealthPoint;
         this.healthPoint = maxHealthPoint;
         this.strength = strength;
         this.dexterity = dexterity;
         this.attackPower = attackPower;
+        this.xp = xp;
+        this.maxXP = 500;
         this.gold = gold;
         this.block = false;
     }
@@ -96,5 +99,15 @@ public abstract class GameCharacter implements Fighter {
 
         System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)\n",
                 this.name, potion, this.healthPoint, this.maxHealthPoint);
+    }
+
+    @Override
+    public String toString() {
+        return "---Характеристики персонажа--- {" +
+                "Имя = " + name + "; " +
+                "Здоровье = " + healthPoint + " / " + maxHealthPoint + "; " +
+                "Опыт = " + xp + " / " + maxXP + "; " +
+                "Золото = " + gold +
+                '}';
     }
 }
