@@ -19,16 +19,19 @@ public abstract class GameCharacter implements Fighter {
     private boolean block;
 
     private int xp;
+    private int maxXP;
     private int gold;
 
 
-    protected GameCharacter(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, int gold) {
+    protected GameCharacter(String name, int maxHealthPoint, int strength, int dexterity, int attackPower, int xp, int gold) {
         this.name = name;
         this.maxHealthPoint = maxHealthPoint;
         this.healthPoint = maxHealthPoint;
         this.strength = strength;
         this.dexterity = dexterity;
         this.attackPower = attackPower;
+        this.xp = xp;
+        this.maxXP = 500;
         this.gold = gold;
         this.block = false;
     }
@@ -36,7 +39,7 @@ public abstract class GameCharacter implements Fighter {
     @Override
     public void attack(GameCharacter target) {
         int damage = attackPower + strength;
-        int criticalDamageIgnoringBlock = damage * 2;
+        int criticalDamageIgnoringBlock = attackPower + strength;
 
         if (target.block) {
 
@@ -44,10 +47,10 @@ public abstract class GameCharacter implements Fighter {
                 System.out.printf("%s атакует, но %s полностью блокирует атаку\n", this.name, target.name);
 
             } else {
-                target.healthPoint -= criticalDamageIgnoringBlock;
+                target.healthPoint -= criticalDamageIgnoringBlock * 1.5;
 
                 System.out.printf("""
-                                Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед по незащищенной области
+                                Пока %s стоит в блоке %s атакует и наносит увеличиный урон в %d ед (x1.5) по незащищенной области
                                 У персонажа %s осталось %d / %d ед здоровья
                                 """,
                         target.name, this.name, criticalDamageIgnoringBlock,
@@ -68,7 +71,8 @@ public abstract class GameCharacter implements Fighter {
     @Override
     public void blockAction() {
         block = true;
-        healthPoint += 7;
+        int blockHP = 7;
+        healthPoint += blockHP;
 
         if (this.healthPoint > this.maxHealthPoint) {
             this.healthPoint = this.maxHealthPoint;
@@ -76,8 +80,8 @@ public abstract class GameCharacter implements Fighter {
 
         System.out.printf("""
                 %s встает в защитную стойку и готовится...
-                Здоровье +7 ед (%d / %d)
-                """, this.name, this.healthPoint, this.maxHealthPoint);
+                Здоровье +%d ед (%d / %d)
+                """, this.name, blockHP, this.healthPoint, this.maxHealthPoint);
     }
 
     public void blockReset() {
@@ -86,7 +90,7 @@ public abstract class GameCharacter implements Fighter {
 
     @Override
     public void healing() {
-        int potion = 30;
+        int potion = 50;
         this.healthPoint = this.healthPoint + potion;
 
         if (this.healthPoint > this.maxHealthPoint) {
@@ -95,5 +99,15 @@ public abstract class GameCharacter implements Fighter {
 
         System.out.printf("%s пьет зелье здоровья\nЗдоровье +%d ед (%d / %d)\n",
                 this.name, potion, this.healthPoint, this.maxHealthPoint);
+    }
+
+    @Override
+    public String toString() {
+        return "---Характеристики персонажа--- {" +
+                "Имя = " + name + "; " +
+                "Здоровье = " + healthPoint + " / " + maxHealthPoint + "; " +
+                "Опыт = " + xp + " / " + maxXP + "; " +
+                "Золото = " + gold +
+                '}';
     }
 }

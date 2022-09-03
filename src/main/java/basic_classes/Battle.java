@@ -25,7 +25,14 @@ public class Battle {
             if (input.equals("/атака")) {
                 hero.attack(enemy);
                 if (enemy.getHealthPoint() <= 0) {
-                    System.out.printf("\n%s убил персонажа '%s' и выиграл бой\n", hero.getName(), enemy.getName());
+                    hero.setXp(hero.getXp() + enemy.getXp());
+                    hero.setGold(hero.getGold() + enemy.getGold());
+                    System.out.printf("""
+                            \n%s убил персонажа '%s' и выиграл бой
+                            %s получил: %d ед золота и %d ед опыта
+                            """, hero.getName(), enemy.getName(), hero.getName(),
+                            enemy.getGold(), enemy.getXp());
+                    System.out.println("\n" + hero);
                     break;
                 }
 
