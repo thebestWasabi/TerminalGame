@@ -9,7 +9,7 @@ public class MainHero extends GameCharacter {
     }
 
     public static MainHero createPlayer(String name) {
-        return new MainHero(name, 80, 10, 10, 10, 0, 10);
+        return new MainHero(name, 80, 10, 10, 10, 0, 0);
     }
 
 }
