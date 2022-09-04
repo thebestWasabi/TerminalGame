@@ -8,20 +8,16 @@ public class Main {
 
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
     public static void main(String[] args) {
         startGame();
     }
 
     public static void startGame() {
         System.out.print("Введите имя своего персонажа: ");
-
         try {
             characterControl(reader.readLine());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
-
-
 }
