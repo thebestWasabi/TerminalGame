@@ -13,7 +13,29 @@ public class Control {
     static GameCharacter player = null;
 
 
-    private static void navigationMenu() {
+    public static void characterControl(String name) throws IOException {
+        if (player == null) {
+            player = MainHero.createPlayer(name);
+        }
+
+        String commander;
+        do {
+            navigationMenu();
+            System.out.print("\nПишите свой выбор сюда: ");
+
+            commander = reader.readLine();
+            switch (commander) {
+                case "1" -> System.out.println("\nВ городе пока что нет городского торговца");
+                case "2", "да" -> goToTheDarkWood();
+                case "3" -> System.out.println("Exit");
+                case "нет" -> navigationMenu();
+                default -> System.out.println("Введите корректное значение");
+            }
+        } while (!commander.equals("3"));
+    }
+
+
+    public static void navigationMenu() {
         System.out.printf("""
                 \n---%s стоит на городской площади---
                 \nВыберите что делать дальше и нажмите enter:
@@ -24,29 +46,7 @@ public class Control {
     }
 
 
-    public static void characterControl(String name) throws IOException {
-        if (player == null) {
-            player = MainHero.createPlayer(name);
-        }
-
-        String command;
-        do {
-            navigationMenu();
-            System.out.print("\nПишите свой выбор сюда: ");
-
-            command = reader.readLine();
-            switch (command) {
-                case "1" -> System.out.println("\nВ городе пока что нет городского торговца");
-                case "2", "да" -> goToTheDarkWood();
-                case "3" -> System.out.println("Exit");
-                case "нет" -> navigationMenu();
-                default -> System.out.println("Введите корректное значение");
-            }
-        } while (!command.equals("3"));
-    }
-
-
-    private static void goToTheDarkWood() throws IOException {
+    public static void goToTheDarkWood() throws IOException {
         Battle.fight(player, Monsters.createMonster());
     }
 }

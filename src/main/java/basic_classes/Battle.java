@@ -1,15 +1,15 @@
 package basic_classes;
 
+import battle_characters.MainHero;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import static java.lang.Compiler.command;
 
 public class Battle {
 
     static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-
 
     public static void fight(GameCharacter hero, GameCharacter enemy) throws IOException {
         System.out.printf("""
@@ -31,17 +31,19 @@ public class Battle {
                     hero.setGold(hero.getGold() + enemy.getGold());
                     System.out.printf("""
                             \n%s убил персонажа '%s' и получил: %d ед золота и %d ед опыта
-                            """, hero.getName(), enemy.getName(), hero.getName(), enemy.getGold(), enemy.getXp());
+                            """, hero.getName(), enemy.getName(), enemy.getGold(), enemy.getXp());
                     System.out.println("\n" + hero);
 
                     System.out.println("\nХотите продолжить поход? (да / нет)");
-                    try {
-                        command(reader.readLine());
-                    }catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
 
+                    String asd = reader.readLine();
+                    if (asd.equals("да")) {
+                        Control.goToTheDarkWood();
+                    } else {
+                        System.out.printf("\n%s решил закончить совой поход и вернуться в город \n", hero.getName());
+                    }
+                    break;
+                }
             } else if (input.equals("/блок")) {
                 hero.blockAction();
             } else if (input.equals("/зелье")) {
